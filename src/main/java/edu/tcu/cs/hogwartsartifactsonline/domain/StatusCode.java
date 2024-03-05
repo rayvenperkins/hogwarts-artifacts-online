@@ -1,4 +1,4 @@
-package domain;
+package edu.tcu.cs.hogwartsartifactsonline.domain;
 
 public class StatusCode {
     public static final int SUCCESS = 200;

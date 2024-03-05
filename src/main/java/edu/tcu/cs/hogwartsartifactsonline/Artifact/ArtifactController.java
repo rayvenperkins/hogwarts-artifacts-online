@@ -1,8 +1,7 @@
-package Artifact;
+package edu.tcu.cs.hogwartsartifactsonline.Artifact;
 
-import domain.Result;
-import domain.StatusCode;
-import domain.Artifact;
+import edu.tcu.cs.hogwartsartifactsonline.domain.Result;
+import edu.tcu.cs.hogwartsartifactsonline.domain.StatusCode;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,25 +22,26 @@ public class ArtifactController {
     }
 
     @GetMapping("/artifacts/{artifactId}")
-    public Result findArtifactById(@PathVariable Integer artifactId) {
+    public Result findArtifactById(@PathVariable String artifactId) {
+        Artifact foundArtifact = artifactService.findArtifactById(artifactId);
         return new Result(true, StatusCode.SUCCESS, "Find One Success", null);
 
     }
 
     @PutMapping("/artifacts/{artifactId}")
-    public Result updateArtifact(@PathVariable Integer artifactId) {
+    public Result updateArtifact(@PathVariable String artifactId) {
         return new Result(true, StatusCode.SUCCESS, "Find One Success", null);
 
     }
 
     @PostMapping("/artifacts/{artifactId}")
-    public Result createArtifact(@PathVariable Integer artifactId) {
+    public Result createArtifact(@PathVariable String artifactId) {
         return new Result(true, StatusCode.SUCCESS, "Find One Success", null);
 
     }
 
     @DeleteMapping("/artifacts/{artifactId}")
-    public Result deleteArtifact(@PathVariable Integer artifactId) {
+    public Result deleteArtifact(@PathVariable String artifactId) {
         return new Result(true, StatusCode.SUCCESS, "Find One Success", null);
 
     }
