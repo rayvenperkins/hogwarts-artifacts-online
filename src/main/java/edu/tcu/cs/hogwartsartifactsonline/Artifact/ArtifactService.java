@@ -25,8 +25,28 @@ public class ArtifactService {
 
     public Artifact findArtifactById(String artifactId) {
         Optional<Artifact> foundArtifact = artifactRepository.findById(artifactId);
-        if(foundArtifact.isPresent()) {
-            return foundArtifact.get();
+        return foundArtifact.orElse(null);
+    }
+
+    public Artifact save(Artifact newArtifact) {
+        return artifactRepository.save(newArtifact);
+    }
+
+    public void deleteArtifact(String artifactId) {
+        this.artifactRepository.deleteById(artifactId);
+    }
+
+    public Artifact updateArtifact(String artifactId, Artifact updatedArtifact) {
+        //get the old artifact
+        Optional<Artifact> oldArtifactOptional = this.artifactRepository.findById(artifactId);
+        if(oldArtifactOptional.isPresent()) {
+            Artifact oldArtifact = oldArtifactOptional.get();
+            oldArtifact.setName(updatedArtifact.getName());
+            oldArtifact.setDescription(updatedArtifact.getDescription());
+            oldArtifact.setImageUrl(updatedArtifact.getImageUrl());
+
+            Artifact update = this.artifactRepository.save(oldArtifact);
+            return update;
         } else {
             return null;
         }
