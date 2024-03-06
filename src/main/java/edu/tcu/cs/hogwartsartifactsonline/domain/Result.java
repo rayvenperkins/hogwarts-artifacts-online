@@ -1,4 +1,4 @@
-package domain;
+package edu.tcu.cs.hogwartsartifactsonline.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
