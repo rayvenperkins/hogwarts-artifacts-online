@@ -1,6 +1,8 @@
 package edu.tcu.cs.hogwartsartifactsonline.Wizard;
 
 
+import edu.tcu.cs.hogwartsartifactsonline.Artifact.Artifact;
+import edu.tcu.cs.hogwartsartifactsonline.Artifact.ArtifactRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,11 @@ import java.util.Optional;
 public class WizardService {
 
     private final WizardRepository wizardRepository;
+    private final ArtifactRepository artifactRepository;
 
-    public WizardService(WizardRepository wizardRepository) {
+    public WizardService(WizardRepository wizardRepository, ArtifactRepository artifactRepository) {
         this.wizardRepository = wizardRepository;
+        this.artifactRepository = artifactRepository;
     }
 
     public Wizard createWizard(Wizard toBeSaved) {
@@ -58,7 +62,12 @@ public class WizardService {
     }
 
 
-    public void assignArtifact(String wizard_id, String artifact_id) {
+    public void assignArtifactToWizard(String wizardId, String artifactId) {
+        Wizard wizard = wizardRepository.findById(wizardId).orElseThrow(() -> new RuntimeException("Wizard not found"));
+        Artifact artifact = artifactRepository.findById(artifactId).orElseThrow(() -> new RuntimeException("Artifact not found"));
 
+        wizard.addArtifact(artifact);
+
+        wizardRepository.save(wizard);
     }
 }
