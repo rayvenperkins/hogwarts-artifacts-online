@@ -37,6 +37,7 @@ public class WizardService {
     public Boolean deleteWizard(String id) {
         Optional<Wizard> optionalWizard = wizardRepository.findById(id);
         if(optionalWizard.isPresent()) {
+            //need to remove wizard's owned artifacts here
             wizardRepository.delete(optionalWizard.get());
             return true;
         } else {
@@ -54,5 +55,10 @@ public class WizardService {
         } else {
             return null;
         }
+    }
+
+
+    public void assignArtifact(String wizard_id, String artifact_id) {
+
     }
 }

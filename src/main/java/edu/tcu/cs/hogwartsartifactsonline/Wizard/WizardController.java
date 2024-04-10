@@ -70,5 +70,12 @@ public class WizardController {
     }
 
 
+    @PutMapping("/wizard/{wizard_id}/artifacts/{artifact_id}")
+    public Result assignArtifact(@PathVariable String wizard_id, @PathVariable String artifact_id) {
+        return null;
+
+    }
+
+
 
 }
