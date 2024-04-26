@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -63,5 +64,12 @@ public class ArtifactController {
 
         return new Result(true, StatusCode.SUCCESS, "Delete Success", null);
 
+    }
+
+    @PostMapping("/search")
+    public Result findArtifactsByCriteria(@RequestBody Map<String, String> searchCriteria, Pageable pageable) {
+        Page<Artifact> artifactPage = this.artifactService.findByCriteria(searchCriteria, pageable);
+        Page<ArtifactDTO> artifactDtoPage = artifactPage.map(this.artifactToArtifactDTOConverter::convert);
+        return new Result(true, StatusCode.SUCCESS, "Search Success", artifactDtoPage);
     }
 }
