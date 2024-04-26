@@ -2,6 +2,7 @@ package edu.tcu.cs.hogwartsartifactsonline.Artifact;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class ArtifactService {
         this.artifactRepository = artifactRepository;
     }
 
-    public List<Artifact> findAll(Pageable pageable) {
+    public Page<Artifact> findAll(Pageable pageable) {
         return artifactRepository.findAll(pageable);
     }
 
