@@ -4,6 +4,8 @@ import edu.tcu.cs.hogwartsartifactsonline.Artifact.converter.ArtifactDTOToArtifa
 import edu.tcu.cs.hogwartsartifactsonline.Artifact.converter.ArtifactToArtifactDTOConverter;
 import edu.tcu.cs.hogwartsartifactsonline.domain.Result;
 import edu.tcu.cs.hogwartsartifactsonline.domain.StatusCode;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +24,11 @@ public class ArtifactController {
     }
 
     @GetMapping("/artifacts")
-    public Result findAllArtifacts() {
-        List<Artifact> artifacts = artifactService.findAll();
-        return new Result(true, StatusCode.SUCCESS, "Find All Success", artifacts);
+    public Result findAllArtifacts(Pageable pageable) {
+        Page<Artifact> artifactPage = artifactService.findAll(pageable);
+        Page<ArtifactDTO> artifactDTOS = artifactPage
+                .map(this.artifactToArtifactDTOConverter::convert)
+        return new Result(true, StatusCode.SUCCESS, "Find All Success", artifactDTOS);
     }
 
     @GetMapping("/artifacts/{artifactId}")
