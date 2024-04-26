@@ -52,4 +52,8 @@ public class ArtifactService {
         }
     }
 
+    public String summarize(List<ArtifactDTO> artifactDtos) {
+        return null;
+    }
+
 }

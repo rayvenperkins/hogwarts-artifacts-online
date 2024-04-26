@@ -60,4 +60,9 @@ public class ArtifactController {
         return new Result(true, StatusCode.SUCCESS, "Delete Success", null);
 
     }
+
+    @GetMapping("/summary")
+    public Result summarizeArtifacts() {
+        return null;
+    }
 }
