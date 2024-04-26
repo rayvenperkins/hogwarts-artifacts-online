@@ -27,7 +27,7 @@ public class ArtifactController {
     public Result findAllArtifacts(Pageable pageable) {
         Page<Artifact> artifactPage = artifactService.findAll(pageable);
         Page<ArtifactDTO> artifactDTOS = artifactPage
-                .map(this.artifactToArtifactDTOConverter::convert)
+                .map(this.artifactToArtifactDTOConverter::convert);
         return new Result(true, StatusCode.SUCCESS, "Find All Success", artifactDTOS);
     }
 
